@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #edf1f6 !important;
+}
+.navbar-brand{
+    color: #1e91f4 !important;
+}
+.btn-table{
+    font-size: 10px !important;
+    background-color: #1e91f4 !important;
+    color: #fff !important;
+    padding: 3px 5px !important;
+    margin-right: 5px;
+}
+.btn-table-delete{
+    font-size: 10px !important;
+    background-color: #ff2c69 !important;
+    color: #fff !important;
+    padding: 3px 5px !important;
+}
+.navbar{
+    background-color: #fff;
+}
+.page-hd{
+    text-align: center;
+    font-weight: 100;
+    color: #1e91f4 !important;
+}
+.loader{
+    position: absolute;
+    z-index: 9999;
+    height: 50px;
+    width: 50px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+#success{
+    padding: 4px 20px;
+    display: inline-block;
+    position: fixed;
+    right: 30px;
+    background-color: #0f9628;
+    color: #fff;
+}
+.page-detail-hd{
+    text-align: center;
+    font-weight: 100;
+    margin-top: 0px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+}
+.section{
+    background-color: #fff;
+    padding: 25px 15px;
+    border-radius: 4px;
+    border: #ccc;
+    margin-top: 30px;
+    width: 96%;
+    margin-left: 2%;
+    position: relative;
+    box-shadow: 0px 0px 6px 3px rgb(105 96 215 / 18%);
+}
+.subpage-hd{
+    font-size: 28px;
+    font-weight: 600;
+    margin-left: 2%;
+    margin-top: 30px;
+    color: #202224;
+}
+.pageline{
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: 2%;
+    margin-top: 10px;
+    color: #202224;
+    margin-bottom: 0;
+}
+.label{
+    font-weight: 600;
+    color: #1e91f4;
+    min-width: 60px;
+    display: inline-block;
+    margin-right: 10px;
+}
+.form-input{
+    font-size: 12px !important;
+    margin-bottom: 10px !important;
+}
+.modal-header{
+    background-color: #1e91f4 !important;
+}
+.modal-title{
+    color: #fff !important;
+    font-size: 18px !important;
+}
+.modal-header .close{
+    color: #fff;
+    font-weight: 100 !important;
+    opacity: 1 !important;
+}
+.rdt_TableHead{
+    background-color: #1e91f4 !important;
+}
+.close{
+    color: #ff0000 !important;
+    font-size: 14px !important;
+    cursor: pointer;
+    margin-top: 3px;
+}
+.width50{
+    width: 50% !important;
+    float: left !important;
+}
+.width90{
+    width: 90% !important;
+    float: left !important;
+}
+.width10{
+    width: 10% !important;
+    float: left !important;
+}
+.width100{
+    width: 100% !important;
+    float: left !important;
+}
+.clear-both{
+    clear: both !important;
+}
+.task-item{
+    list-style-type: none;
+    width: 100%;
+    padding: 4px 10px;
+    border: 1px solid #cdd0d4;
+    background-color: #edf1f6;
+    /* box-shadow: 1px 1px 1px rgb(122 122 122); */
+    margin-bottom: 10px;
+}
+.task-title{
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #184469 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+}
+.navbar-brand {
+    color: #1e91f4 !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+}
+.task-description{
+    display: block;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.btn{
+    border-radius: 2px !important;
+}
+.datetime{
+    font-size: 12px;
+    color: #8396ad;
+    margin-left: 20px;
+    font-weight: 600;
+}
+.username{
+    font-size: 12px;
+    font-weight: 600;
+    color: #1e91f4;
+    min-width: 200px;
+}
+.page-subhd {
+    font-size: 18px;
+    color: #1e91f4;
+    margin-bottom: 25px;
+}
+.bg-red{
+    background-color: #ff2c69 !important;
+}
+.delete-qt{
+    color: #fff !important;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: -20px;
+    display: inline-block;
+}
+.trashicon{
+    color: #fff;
+    font-size: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    display: inline-block;
+}
+.modal-content{
+    border: none !important;
+}
+.yes-btn{
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    padding: 3px 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.error-line{
+    color: #ff0000;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
