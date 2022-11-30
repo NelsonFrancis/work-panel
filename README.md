@@ -1,4 +1,4 @@
-## Admin Panel
+## Work Panel
 
 This is an CRUD project. 
 Frontend is created in React.js and the api used is from mockapi.io
