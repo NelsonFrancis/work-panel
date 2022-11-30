@@ -1,7 +1,6 @@
 ## Work Panel
 
-This is an CRUD project. 
-Frontend is created in React.js and the api used is from mockapi.io
+### This is an CRUD project. Frontend is created in React.js and the api used is from mockapi.io
 ---
 #### Project features
 - Dashboard (cotains charts and stats for projects and users registered in the panel)
