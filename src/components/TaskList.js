@@ -22,9 +22,11 @@ const TaskList = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [displaySuccess, setDisplaySuccess] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
+  const [actProj, setActProj] = useState([]);
   const url = "https://637e5495cfdbfd9a63aea916.mockapi.io/workpanel/api/tasks";
   const completedTasksUrl = "https://637e5495cfdbfd9a63aea916.mockapi.io/workpanel/api/completedTasks";
   const userUrl = "https://637e5495cfdbfd9a63aea916.mockapi.io/workpanel/api/users";
+  const projectUrl = 'https://637e5495cfdbfd9a63aea916.mockapi.io/workpanel/api/projects';
   const deleteIcon = <FontAwesomeIcon icon={faXmark} />;
   const usericon = <FontAwesomeIcon icon={faUser} />;
   const calendaricon = <FontAwesomeIcon icon={faCalendarAlt} />;
@@ -129,6 +131,14 @@ const TaskList = () => {
     axios.get(completedTasksUrl).then(response => {
       console.log("Completed task data response = ", response.data);
       setCompletedTask(response.data);
+    });
+
+    axios.get(projectUrl).then(response => {
+      console.log("project data response = ", response.data);
+      let projectResponse = response.data;
+      let activeProjects = projectResponse.filter(aProject => {return aProject.status === "Ongoing"});
+      setActProj(activeProjects);
+      console.log("active projects = ",activeProjects);
     });
     
     getUsers();
@@ -279,13 +289,24 @@ const TaskList = () => {
                     onChange={(e) => setTaskTitle(e.target.value)}
                     required
                   />
-                  <input
+                  {/* <input
                     type="text"
                     className="form-control form-input"
                     placeholder="Project"
                     onChange={(e) => setProjectName(e.target.value)}
                     required
-                  />
+                  /> */}
+                  <select 
+                    className="form-control form-input"
+                    onChange={(e) => setProjectName(e.target.value)}
+                  >
+                    <option value="">- select -</option>
+                    {
+                      actProj.map(aProj => {
+                       return <option key={aProj.id} value={aProj.projectName}>{aProj.projectName}</option>
+                      })
+                    }
+                  </select>
                   <input
                     type="text"
                     className="form-control form-input"
