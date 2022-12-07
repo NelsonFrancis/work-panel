@@ -10,13 +10,12 @@ https://prium.github.io/falcon/v3.4.0/dashboard/crm.html
 - [ ] add charts
     - [ ] no. of users - active, inactive
     - [ ] no. of projects - ongoing, completed
+    - [ ] no. of tasks - pending, completed
 
 ### General
 - [ ] overall ui change
-- [ ] change favicon and name to 'Work Panel'
-- [ ] code clean
+- [ ] active nav link highlight
+- [ ] add icons for nav links
 
 ### Taskist
-- [ ] integrate updated api link
 - [ ] hot reload
-

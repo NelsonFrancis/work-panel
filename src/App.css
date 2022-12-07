@@ -152,6 +152,12 @@ body{
     font-weight: 600;
     color: #000;
 }
+.project-title{
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #1e91f4;
+}
 .navbar-light .navbar-nav .nav-link {
     color: #184469 !important;
     font-size: 12px !important;

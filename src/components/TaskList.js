@@ -7,20 +7,24 @@ import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import loader from '../assets/images/loader.gif';
+import { Modal } from "react-bootstrap";
 
 const TaskList = () => {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskUser, setTaskUser] = useState("");
+  const [projectName, setProjectName] = useState("");
   const [userdata, setUserData] = useState([]);
   const [taskData, setTaskData] = useState([]);
   const [completedTask, setCompletedTask] = useState([]);
   const [deleteId, setDeleteId] = useState("");
-  const [deleteNode, setDeleteNode] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const url = "https://62b9a40fff109cd1dc97470c.mockapi.io/api/userlist/tasks";
-  const completedTasksUrl = "https://62b9a40fff109cd1dc97470c.mockapi.io/api/userlist/completedTasks";
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [displaySuccess, setDisplaySuccess] = useState(false);
+  const [successMsg, setSuccessMsg] = useState('');
+  const url = "https://637e5495cfdbfd9a63aea916.mockapi.io/workpanel/api/tasks";
+  const completedTasksUrl = "https://637e5495cfdbfd9a63aea916.mockapi.io/workpanel/api/completedTasks";
+  const userUrl = "https://637e5495cfdbfd9a63aea916.mockapi.io/workpanel/api/users";
   const deleteIcon = <FontAwesomeIcon icon={faXmark} />;
   const usericon = <FontAwesomeIcon icon={faUser} />;
   const calendaricon = <FontAwesomeIcon icon={faCalendarAlt} />;
@@ -43,7 +47,8 @@ const TaskList = () => {
       description: taskDescription,
       date: currentDate,
       time: currentTime,
-      user: taskUser
+      user: taskUser,
+      projectName: projectName
     }
     axios.post(url, formData)
       .then(response => console.log("response = ", response));
@@ -51,7 +56,7 @@ const TaskList = () => {
 
   const getUsers = async () => {
     try{
-      const response = await axios.get('https://62b9a40fff109cd1dc97470c.mockapi.io/api/userlist/users');
+      const response = await axios.get(`${userUrl}`);
       setUserData(response.data);
       console.log("user res", response.data);
     }catch (error){
@@ -59,14 +64,26 @@ const TaskList = () => {
     }
   }  
 
-  const deleteTask = (e, id) => {
-    setDeleteNode(e.target);
+  const deleteTask = (id) => {
     setDeleteId(id);
+    setShowDeleteModal(true);
   }
 
   const confirmDelete = (data) => {
-    axios.delete(`https://62b9a40fff109cd1dc97470c.mockapi.io/api/userlist/tasks/${data}`)
-    .then(res => console.log(res));
+    setShowDeleteModal(false);
+    setLoading(true);
+    axios.delete(`${url}/${data}`)
+    .then(res => {
+      console.log(res);
+      setLoading(false);
+      setDisplaySuccess(true);
+      setSuccessMsg('Task deleted successfully !!!');
+      setTimeout(() => {
+        setDisplaySuccess(false);
+        setSuccessMsg('');
+        window.location.reload(false);
+      }, 3000);
+    });
   }
 
   const taskCompleted = (data) => {
@@ -80,7 +97,7 @@ const TaskList = () => {
     axios.post(completedTasksUrl, completedData)
       .then(response => console.log("response =# ", response));
     
-    axios.delete(`https://62b9a40fff109cd1dc97470c.mockapi.io/api/userlist/tasks/${data.id}`)
+    axios.delete(`${url}/${data.id}`)
       .then(res => console.log(res));
   }
 
@@ -95,7 +112,7 @@ const TaskList = () => {
     axios.post(url, notCompletedData)
       .then(response => console.log("response ", response));
 
-    axios.delete(`https://62b9a40fff109cd1dc97470c.mockapi.io/api/userlist/completedTasks/${data.id}`)
+    axios.delete(`${completedTasksUrl}/${data.id}`)
       .then(res => console.log(res));
   }
 
@@ -121,8 +138,8 @@ const TaskList = () => {
     
     <div className="container">
       <div className="row">
-      {loading ? <img src={loader} alt='loader' className='loader' /> : <></>}
-     
+      {loading && <img src={loader} alt='loader' className='loader' />}
+      {displaySuccess && <span id="success">{successMsg}</span>}
       <div className="col-md-6">
           <div className="section mb-4">
             <div className="width50">
@@ -147,8 +164,11 @@ const TaskList = () => {
                       <span className="task-title">{data.title}</span>
                     </span>
                     <span className="width10">
-                      <span className="close" data-toggle="modal" data-target="#deleteTask" data-id={data.id} onClick={e => deleteTask(e, data.id)}>{deleteIcon}</span>
+                      <span className="close" onClick={e => deleteTask(data.id)}>{deleteIcon}</span>
                     </span>
+                    <span className="width100">
+                        <span className="project-title">{data.projectName}</span>
+                      </span>
                     <span className="width100">
                       <span className="username">
                         {usericon} {data.user}
@@ -192,6 +212,9 @@ const TaskList = () => {
                     <li key={data.id} className="task-item">
                       <span className="width100">
                         <span className="task-title">{data.title}</span>
+                      </span>
+                      <span className="width100">
+                        <span className="project-title">{data.projectName}</span>
                       </span>
                       <span className="width100">
                         <span className="username">
@@ -259,6 +282,13 @@ const TaskList = () => {
                   <input
                     type="text"
                     className="form-control form-input"
+                    placeholder="Project"
+                    onChange={(e) => setProjectName(e.target.value)}
+                    required
+                  />
+                  <input
+                    type="text"
+                    className="form-control form-input"
                     placeholder="Task Description"
                     onChange={(e) => setTaskDescription(e.target.value)}
                     required
@@ -282,6 +312,7 @@ const TaskList = () => {
             </div>
           </div>
         </div>
+
         <div
           className="modal fade"
           id="deleteTask"
@@ -305,6 +336,21 @@ const TaskList = () => {
             </div>
           </div>
         </div>
+
+        <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} id="deleteTask">
+          <Modal.Body className="bg-red">
+            <>
+              <p className="text-center">
+                <span className="trashicon">{trashicon}</span>
+                <span className="delete-qt">Are you sure you want to delete this task?</span>
+              </p>
+              <p className="text-center">
+              <button className="yes-btn" onClick={e => confirmDelete(deleteId)}>Yes</button>
+              <button className="yes-btn" data-dismiss="modal">No</button>
+              </p>
+            </>
+          </Modal.Body>
+        </Modal>
         
       </div>
     </div>
