@@ -51,6 +51,7 @@ body{
     right: 30px;
     background-color: #0f9628;
     color: #fff;
+    z-index: 9999;
 }
 .page-detail-hd{
     text-align: center;

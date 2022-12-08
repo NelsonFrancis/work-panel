@@ -20,6 +20,7 @@ const TaskList = () => {
   const [deleteId, setDeleteId] = useState("");
   const [loading, setLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
   const [displaySuccess, setDisplaySuccess] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
   const [actProj, setActProj] = useState([]);
@@ -35,6 +36,8 @@ const TaskList = () => {
 
   const addTaskSubmit = async (e) => {
     e.preventDefault();
+    setShowAddModal(false);
+    setLoading(true);
     let newDate = new Date()
     let date = newDate.getDate();
     let month = newDate.getMonth() + 1;
@@ -53,7 +56,17 @@ const TaskList = () => {
       projectName: projectName
     }
     axios.post(url, formData)
-      .then(response => console.log("response = ", response));
+      .then(response => {
+        console.log("response = ", response);
+        setLoading(false);
+        setDisplaySuccess(true);
+        setSuccessMsg('Task added successfully !!!');
+        setTimeout(() => {
+          setDisplaySuccess(false);
+          setSuccessMsg('');
+          window.location.reload(false);
+        }, 2000);
+      });
   };
 
   const getUsers = async () => {
@@ -84,7 +97,7 @@ const TaskList = () => {
         setDisplaySuccess(false);
         setSuccessMsg('');
         window.location.reload(false);
-      }, 3000);
+      }, 2000);
     });
   }
 
@@ -94,13 +107,17 @@ const TaskList = () => {
       description: data.description,
       date: data.date,
       time: data.time,
-      user: data.user
+      user: data.user,
+      projectName: data.projectName
     }
     axios.post(completedTasksUrl, completedData)
       .then(response => console.log("response =# ", response));
     
     axios.delete(`${url}/${data.id}`)
-      .then(res => console.log(res));
+      .then(res => {
+        console.log(res)
+        window.location.reload(false);
+      });
   }
 
   const taskNotCompleted = (data) => {
@@ -109,13 +126,17 @@ const TaskList = () => {
       description: data.description,
       date: data.date,
       time: data.time,
-      user: data.user
+      user: data.user,
+      projectName: data.projectName
     }
     axios.post(url, notCompletedData)
       .then(response => console.log("response ", response));
 
     axios.delete(`${completedTasksUrl}/${data.id}`)
-      .then(res => console.log(res));
+      .then(res => {
+        console.log(res)
+        window.location.reload(false);
+      });
   }
 
   useEffect(() => {
@@ -158,8 +179,7 @@ const TaskList = () => {
             <div className="width50">
               <button
                 className="btn btn-table mb-4 float-right"
-                data-toggle="modal"
-                data-target="#addTask"
+                onClick={e => setShowAddModal(true)}
               >
                 Add Task
               </button>
@@ -256,32 +276,14 @@ const TaskList = () => {
               </ul>
             </div>
           </div>
-        
 
-        <div
-          className="modal fade"
-          id="addTask"
-          role="dialog"
-          aria-labelledby="addTaskLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="addTaskLabel">
-                  Add Task
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <form id="addUser" onSubmit={addTaskSubmit}>
+        <Modal show={showAddModal} onHide={() => setShowAddModal(false)} id="addTask">
+          <Modal.Header>
+            <Modal.Title>Add Tasks</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <>
+            <form id="addUser" onSubmit={addTaskSubmit}>
                   <input
                     type="text"
                     className="form-control form-input"
@@ -289,13 +291,6 @@ const TaskList = () => {
                     onChange={(e) => setTaskTitle(e.target.value)}
                     required
                   />
-                  {/* <input
-                    type="text"
-                    className="form-control form-input"
-                    placeholder="Project"
-                    onChange={(e) => setProjectName(e.target.value)}
-                    required
-                  /> */}
                   <select 
                     className="form-control form-input"
                     onChange={(e) => setProjectName(e.target.value)}
@@ -329,34 +324,9 @@ const TaskList = () => {
                     Submit
                   </button>
                 </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="modal fade"
-          id="deleteTask"
-          role="dialog"
-          aria-labelledby="deleteTask"
-          aria-hidden="true"
-          data-deleteid={deleteId}
-        >
-          <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
-              <div className="modal-body bg-red">
-                    <p className="text-center">
-                      <span className="trashicon">{trashicon}</span>
-                      <span className="delete-qt">Are you sure you want to delete this task?</span>
-                    </p>
-                    <p className="text-center">
-                    <button className="yes-btn" onClick={e => confirmDelete(deleteId)}>Yes</button>
-                    <button className="yes-btn" data-dismiss="modal">No</button>
-                    </p>
-              </div>
-            </div>
-          </div>
-        </div>
+            </>
+          </Modal.Body>
+        </Modal>
 
         <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} id="deleteTask">
           <Modal.Body className="bg-red">
