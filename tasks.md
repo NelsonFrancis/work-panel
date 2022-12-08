@@ -14,6 +14,4 @@ https://prium.github.io/falcon/v3.4.0/dashboard/crm.html
 
 ### General
 - [ ] overall ui change
-- [ ] active nav link highlight
-- [ ] add icons for nav links
 
