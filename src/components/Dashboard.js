@@ -65,13 +65,13 @@ const Dashboard = () => {
   return (
     <div className='section'>
      <div className='row'>
+     <div className='col-md-4'>
+        <h2 className='dashboard-hd'>Users</h2>
+        <Pie data={users} />
+      </div>
       <div className='col-md-4'>
         <h2 className='dashboard-hd'>Projects</h2>
         <Pie data={projects} />
-      </div>
-      <div className='col-md-4'>
-        <h2 className='dashboard-hd'>Users</h2>
-        <Pie data={users} />
       </div>
       <div className='col-md-4'>
         <h2 className='dashboard-hd'>Tasks</h2>
