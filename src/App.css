@@ -44,6 +44,10 @@ body{
     margin-left: auto;
     margin-right: auto;
 }
+.dashboard-hd {
+    font-size: 18px;
+    text-align: center;
+}
 #success{
     padding: 4px 20px;
     display: inline-block;
