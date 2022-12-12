@@ -11,6 +11,7 @@ const UserDetails = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [website, setWebsite] = useState('');
+    const [active, setActive] = useState(false);
     const [editModelShow, setEditModelShow] = useState(false);
     const [displaySuccess, setDisplaySuccess] = useState(false);
     const [successMsg, setSuccessMsg] = useState('');
@@ -26,6 +27,7 @@ const UserDetails = () => {
             setEmail(response.data.email);
             setPhone(response.data.phone);
             setWebsite(response.data.website);
+            setActive(response.data.active);
         })
     }
 
@@ -35,7 +37,8 @@ const UserDetails = () => {
             name: fullname,
             email: email,
             phone: phone,
-            website: website
+            website: website,
+            active: active
         }
         axios.put(`${url}/${id}`, updatedUser)
             .then(response => {
@@ -46,9 +49,18 @@ const UserDetails = () => {
               setTimeout(() => {
                 setDisplaySuccess(false);
                 setSuccessMsg('');
+                window.location.reload(false);
               }, 3000);
             }
         );
+    }
+
+    const setActiveChange = (val) => {
+      if(val === "true"){
+        setActive(true);
+      }else{
+        setActive(false);
+      }
     }
 
     useEffect(() => { 
@@ -65,6 +77,7 @@ const UserDetails = () => {
         <p><span className='label'>Email:</span> {user.email}</p>
         <p><span className='label'>Phone:</span> {user.phone}</p>
         <p><span className='label'>Website:</span> {user.website}</p>
+        <p><span className='label'>Status:</span> {user.active ? "Active" : "Inactive"}</p>
 
         <Modal show={editModelShow} onHide={() => setEditModelShow(false)}>
           <Modal.Header>
@@ -77,6 +90,10 @@ const UserDetails = () => {
                   <input type='text' className="form-control form-input" placeholder='Email' onChange={e => setEmail(e.target.value)} required value={email} />
                   <input type='text' className="form-control form-input" placeholder='Phone' onChange={e => setPhone(e.target.value)} required value={phone} />
                   <input type='text' className="form-control form-input" placeholder='Website' onChange={e => setWebsite(e.target.value)} required value={website} />
+                  <select type='text' className="form-control form-input" onChange={e => setActiveChange(e.target.value)} required value={active}>
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                  </select>
                   <button type='submit' className='btn btn-table mt-2'>Submit</button>
                 </form>
             </>

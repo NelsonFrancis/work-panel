@@ -72,8 +72,9 @@ const TaskList = () => {
   const getUsers = async () => {
     try{
       const response = await axios.get(`${userUrl}`);
-      setUserData(response.data);
-      console.log("user res", response.data);
+      let activeUsers = response.data.filter(user => {return user.active === true});
+      setUserData(activeUsers);
+      console.log("user res", activeUsers);
     }catch (error){
       console.log("user error", error);
     }
@@ -283,7 +284,7 @@ const TaskList = () => {
           </Modal.Header>
           <Modal.Body>
             <>
-            <form id="addUser" onSubmit={addTaskSubmit}>
+            <form onSubmit={addTaskSubmit}>
                   <input
                     type="text"
                     className="form-control form-input"

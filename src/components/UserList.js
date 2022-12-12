@@ -11,6 +11,7 @@ const UserList = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [website, setWebsite] = useState('');
+  const [active, setActive] = useState();
   const [displaySuccess, setDisplaySuccess] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
   const [addModelShow, setAddModelShow] = useState(false);
@@ -24,7 +25,8 @@ const UserList = () => {
       name: fullname,
       email: email,
       phone: phone,
-      website: website
+      website: website,
+      active: active
     }
     axios.post(`${url}`, formData)
       .then(response => {
@@ -79,17 +81,37 @@ const UserList = () => {
       sortable: true,
     },
     {
+      name: 'Status',
+      selector: (row) => {
+       if(row.active === true){
+        return "Active"
+       }else if(row.active === false){
+        return "Inactive"
+       }
+        
+      },
+      sortable: true,
+    },
+    {
       name: 'Action',
       selector: (row) => <><Link to={'/userlist/'+row.id} rowid={row.id} className='btn btn-table'>Details</Link> <a rowid={row.id} onClick={e => deleteUser(row.id)} className='btn btn-table-delete'>Delete</a></>
     }
   ]
+
+  const setActiveChange = (val) => {
+    if(val === "true"){
+      setActive(true);
+    }else{
+      setActive(false);
+    }
+  }
   
   return (
     <div className='section'>
       {showLoader &&  <img src={loader} alt='loader' className='loader' />}
       {displaySuccess && <span id="success">{successMsg}</span>}
       {
-        userdata.length == 0 ? 
+        userdata.length === 0 ? 
         <img src={loader} alt='loader' className='loader' /> : 
         <div>
           <button className='btn btn-table mb-4' onClick={() => setAddModelShow(true)}>Add User</button>
@@ -108,6 +130,10 @@ const UserList = () => {
                   <input type='text' className="form-control form-input" placeholder='Email' onChange={e => setEmail(e.target.value)} required />
                   <input type='text' className="form-control form-input" placeholder='Phone' onChange={e => setPhone(e.target.value)} required />
                   <input type='text' className="form-control form-input" placeholder='Website' onChange={e => setWebsite(e.target.value)} required />
+                  <select type='text' className="form-control form-input" onChange={e => setActiveChange(e.target.value)} required value={active}>
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                  </select>
                   <button type='submit' className='btn btn-table mt-2'>Submit</button>
                 </form>
             </>
