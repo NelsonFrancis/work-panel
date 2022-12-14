@@ -90,7 +90,7 @@ const ProjectDetails = () => {
                   <input type='text' className="form-control form-input" placeholder='Client Name' onChange={e => setClientName(e.target.value)} required value={clientName} />
                   <input type='text' className="form-control form-input" placeholder='Project Description' onChange={e => setProjectDescription(e.target.value)} required value={projectDescription} />
                   <input type='date' className="form-control form-input" placeholder='Project Deadline' onChange={e => setProjectDeadline(e.target.value)} required value={projectDeadline} />
-                  <select className="form-control form-input" onChange={e => setStatus(e.target.value)} required>
+                  <select className="form-control form-input" onChange={e => setStatus(e.target.value)} required value={status}>
                       <option value="">Select Status</option>
                       <option value="Ongoing">Ongoing</option>
                       <option value="Completed">Completed</option>
