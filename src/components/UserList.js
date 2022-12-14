@@ -4,6 +4,8 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 import loader from '../assets/images/loader.gif';
 import { Modal } from "react-bootstrap";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const UserList = () => {
   const [userdata, setUserData] = useState([]);
@@ -16,6 +18,9 @@ const UserList = () => {
   const [successMsg, setSuccessMsg] = useState('');
   const [addModelShow, setAddModelShow] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
+  const trashicon = <FontAwesomeIcon icon={faTrashCan} />;
   const url = 'https://637e5495cfdbfd9a63aea916.mockapi.io/workpanel/api/users';
 
   const addUserSubmit = (e) => {
@@ -46,8 +51,26 @@ const UserList = () => {
 
   const deleteUser = (id) => {
     console.log("deleted = ", id);
+    setDeleteId(id);
+    setShowDeleteModal(true);
+    
+  }
+
+  const confirmDeleteUser = (id) => {
+    setShowDeleteModal(false);
+    setShowLoader(true);
     axios.delete(`${url}/${id}`)
-      .then(response => console.log("delete response =", response));
+      .then(response => {
+        console.log("delete response =", response);
+        setShowLoader(false);
+        setDisplaySuccess(true);
+        setSuccessMsg('User deleted successfully !!!');
+        setTimeout(() => {
+          setDisplaySuccess(false);
+          setSuccessMsg('');
+          window.location.reload(false);
+        }, 3000);
+      });
   }
 
   const getUsers = async () => {
@@ -136,6 +159,21 @@ const UserList = () => {
                   </select>
                   <button type='submit' className='btn btn-table mt-2'>Submit</button>
                 </form>
+            </>
+          </Modal.Body>
+        </Modal>
+
+        <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} id="deleteUser">
+          <Modal.Body className="bg-red">
+            <>
+              <p className="text-center">
+                <span className="trashicon">{trashicon}</span>
+                <span className="delete-qt">Are you sure you want to delete this user?</span>
+              </p>
+              <p className="text-center">
+              <button className="yes-btn" onClick={e => confirmDeleteUser(deleteId)}>Yes</button>
+              <button className="yes-btn" data-dismiss="modal">No</button>
+              </p>
             </>
           </Modal.Body>
         </Modal>
