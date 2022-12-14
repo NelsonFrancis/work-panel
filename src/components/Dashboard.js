@@ -2,10 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import axios from 'axios';
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
+import { faListCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Dashboard = () => {  
+  const userIcon = <FontAwesomeIcon icon={faUsers} />
+  const projectIcon = <FontAwesomeIcon icon={faFolderOpen} />
+  const listIcon = <FontAwesomeIcon icon={faListCheck} />
+
   const projectsUrl = 'https://637e5495cfdbfd9a63aea916.mockapi.io/workpanel/api/projects';
   const usersUrl = 'https://637e5495cfdbfd9a63aea916.mockapi.io/workpanel/api/users';
   const pendingTasksUrl = "https://637e5495cfdbfd9a63aea916.mockapi.io/workpanel/api/tasks";
@@ -132,19 +140,19 @@ const Dashboard = () => {
      <div className='row'>
      <div className='col-md-4'>
         <div className='width80'>
-          <h2 className='dashboard-hd'>Users</h2>
+          <h2 className='dashboard-hd'>{userIcon} Total Users ({activeUsers + inactiveUsers})</h2>
           <Pie data={users} />
         </div>
       </div>
       <div className='col-md-4'>
         <div className='width80'>
-          <h2 className='dashboard-hd'>Projects</h2>
+          <h2 className='dashboard-hd'>{projectIcon} Projects ({ongoingProjects + completedProjects})</h2>
           <Pie data={projects} />
         </div>
       </div>
       <div className='col-md-4'>
         <div className='width80'>
-          <h2 className='dashboard-hd'>Tasks</h2>
+          <h2 className='dashboard-hd'>{listIcon} Tasks ({pendingTasks + completedTasks})</h2>
           <Pie data={tasks} />
           </div>
       </div>
