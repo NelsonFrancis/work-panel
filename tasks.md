@@ -5,12 +5,6 @@ https://prium.github.io/falcon/v3.4.0/dashboard/crm.html
 ---
 ## To Do List in Work Panel
 ---
- 
-### Dashboard
-- [ ] add charts
-    - [ ] no. of users - active, inactive
-    - [ ] no. of projects - ongoing, completed
-    - [ ] no. of tasks - pending, completed
 
 ### General
 - [ ] overall ui change
