@@ -6,6 +6,7 @@ import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import chartImg from '../assets/images/chart.png';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -136,30 +137,57 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <div className='section'>
-     <div className='row'>
-     <div className='col-md-4'>
-        <div className='width80'>
-          <h2 className='dashboard-hd'>{userIcon} Total Users ({activeUsers + inactiveUsers})</h2>
-          <Pie data={users} />
-        </div>
-      </div>
-      <div className='col-md-4'>
-        <div className='width80'>
-          <h2 className='dashboard-hd'>{projectIcon} Projects ({ongoingProjects + completedProjects})</h2>
-          <Pie data={projects} />
-        </div>
-      </div>
-      <div className='col-md-4'>
-        <div className='width80'>
-          <h2 className='dashboard-hd'>{listIcon} Tasks ({pendingTasks + completedTasks})</h2>
-          <Pie data={tasks} />
+     <div className='container'>
+      <div className='row'>
+        <div className='col-md-12'>
+          <div className='section-dashboard'>
+          <div className='row'>
+            <div className='col-md-4'>
+                <h2 className='dashboard-stat-label'>Total Users</h2>
+                <p className='dashboard-stat'>{activeUsers + inactiveUsers}</p>
+                <img src={chartImg} className="chartimg" />
+            </div>
+            <div className='col-md-4'>
+                <h2 className='dashboard-stat-label'>Total Projects</h2>
+                <p className='dashboard-stat'>{ongoingProjects + completedProjects}</p>
+                <img src={chartImg} className="chartimg" />
+            </div>
+            <div className='col-md-4'>
+                <h2 className='dashboard-stat-label'>Total Tasks</h2>
+                <p className='dashboard-stat'>{pendingTasks + completedTasks}</p>
+                <img src={chartImg} className="chartimg" />
+            </div>
+            </div>
           </div>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='col-md-4'>
+          <div className='section-dashboard'>
+            <h2 className='dashboard-hd'>{userIcon} Users</h2>
+            <div className='width80'>
+              <Pie data={users} />
+            </div>
+          </div>
+        </div>
+        <div className='col-md-4'>
+          <div className='section-dashboard'>
+            <h2 className='dashboard-hd'>{projectIcon} Projects</h2>
+            <div className='width80'>
+              <Pie data={projects} />
+            </div>
+          </div>
+        </div>
+        <div className='col-md-4'>
+          <div className='section-dashboard'>
+            <h2 className='dashboard-hd'>{listIcon} Tasks</h2>
+            <div className='width80'>
+              <Pie data={tasks} />
+            </div>
+          </div>
+        </div>
       </div>
      </div>
-     
-     
-    </div>
   )
 }
 
