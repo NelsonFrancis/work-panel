@@ -157,19 +157,24 @@ const UserList = () => {
           <Modal.Header>
             <Modal.Title>Add User</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="pt-0">
             <>
             <form onSubmit={addUserSubmit}>
-                  <input type='text' className="form-control form-input" placeholder='Full Name' onChange={e => setFullname(e.target.value)} required />
-                  <input type='text' className="form-control form-input" placeholder='Email' onChange={e => setEmail(e.target.value)} required />
-                  <input type='text' className="form-control form-input" placeholder='Phone' onChange={e => setPhone(e.target.value)} required />
-                  <input type='text' className="form-control form-input" placeholder='Website' onChange={e => setWebsite(e.target.value)} required />
-                  <select type='text' className="form-control form-input" onChange={e => setActiveChange(e.target.value)} required value={active}>
-                    <option value="true">Active</option>
-                    <option value="false">Inactive</option>
-                  </select>
-                  <button type='submit' className='btn btn-table mt-2'>Submit</button>
-                </form>
+              <label className='form-label'>Enter the full name</label>
+              <input type='text' className="form-control form-input" placeholder='Full Name' onChange={e => setFullname(e.target.value)} required />
+              <label className='form-label'>Enter the email id</label>
+              <input type='text' className="form-control form-input" placeholder='Email' onChange={e => setEmail(e.target.value)} required />
+              <label className='form-label'>Enter the phone number</label>
+              <input type='text' className="form-control form-input" placeholder='Phone' onChange={e => setPhone(e.target.value)} required />
+              <label className='form-label'>Enter the website</label>
+              <input type='text' className="form-control form-input" placeholder='Website' onChange={e => setWebsite(e.target.value)} required />
+              <label className='form-label'>Select the status</label>
+              <select type='text' className="form-control form-input" onChange={e => setActiveChange(e.target.value)} required value={active}>
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+              </select>
+              <button type='submit' className='btn btn-table mt-2'>Submit</button>
+            </form>
             </>
           </Modal.Body>
         </Modal>

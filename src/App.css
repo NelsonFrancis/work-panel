@@ -60,16 +60,29 @@ body{
     z-index: 9999;
 }
 .page-detail-hd{
-    text-align: center;
-    font-weight: 100;
     margin-top: 0px;
     border-bottom: 1px solid #ccc;
-    padding-bottom: 30px;
     margin-bottom: 20px;
+
+    font-size: 14px;
+    color: #184469;
+    background: #edf1f6;
+    padding: 10px;
 }
 .section{
     background-color: #fff;
     padding: 25px 15px;
+    border-radius: 4px;
+    border: #ccc;
+    margin-top: 30px;
+    width: 96%;
+    margin-left: 2%;
+    position: relative;
+    box-shadow: 0px 0px 6px 3px rgb(105 96 215 / 18%);
+}
+.section-details{
+    background-color: #fff;
+    padding: 0 0 10px;
     border-radius: 4px;
     border: #ccc;
     margin-top: 30px;
@@ -98,6 +111,12 @@ body{
     position: relative;
     box-shadow: 0px 0px 6px 3px rgb(105 96 215 / 18%);
 }
+.form-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #1e91f4;
+    margin-top: 10px;
+}
 .subpage-hd{
     font-size: 28px;
     font-weight: 600;
@@ -118,13 +137,23 @@ body{
     color: #1e91f4;
     min-width: 60px;
     display: inline-block;
-    margin-right: 10px;
+    margin-left: 15px;
+    font-size: 14px;
+}
+.label-val{
+    font-weight: 600;
+    color: #184469 !important;
+    display: inline-block;
+    font-size: 14px;
 }
 .mr4p{
     margin-right: 4% !important;
 }
 .mt45{
     margin-top: 45px !important;
+}
+.mr15{
+    margin-right: 15px;
 }
 .sc-dkzDqf.faVNZf.rdt_TableHeadRow {
     background: #edf1f6;

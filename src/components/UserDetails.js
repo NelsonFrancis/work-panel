@@ -68,37 +68,44 @@ const UserDetails = () => {
     }, [])
 
   return (
-    <div className='section'>
-        {!user && <img src={loader} alt='loader' className='loader' />}
-        {displaySuccess && <span id="success">{successMsg}</span>}
-        <h1 className='page-detail-hd'>{user.name} details</h1>
-        <button className="float-right btn btn-table" onClick={() => setEditModelShow(true)}>Edit</button>
-        <p><span className='label'>Name:</span> {user.name}</p>
-        <p><span className='label'>Email:</span> {user.email}</p>
-        <p><span className='label'>Phone:</span> {user.phone}</p>
-        <p><span className='label'>Website:</span> {user.website}</p>
-        <p><span className='label'>Status:</span> {user.active ? "Active" : "Inactive"}</p>
+    <div className='col-md-6'>
+      <div className='section-details'>
+          {!user && <img src={loader} alt='loader' className='loader' />}
+          {displaySuccess && <span id="success">{successMsg}</span>}
+          <h1 className='page-detail-hd'>{user.name} details</h1>
+          <button className="float-right btn btn-table mr15" onClick={() => setEditModelShow(true)}>Edit details</button>
+          <p><span className='label'>Name:</span> <span className='label-val'>{user.name}</span></p>
+          <p><span className='label'>Email:</span>  <span className='label-val'>{user.email}</span></p>
+          <p><span className='label'>Phone:</span>  <span className='label-val'>{user.phone}</span></p>
+          <p><span className='label'>Website:</span>  <span className='label-val'>{user.website}</span></p>
+          <p><span className='label'>Status:</span>  <span className='label-val'>{user.active ? "Active" : "Inactive"}</span></p>
 
-        <Modal show={editModelShow} onHide={() => setEditModelShow(false)}>
-          <Modal.Header>
-            <Modal.Title>Edit User</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <>
-                <form id='addUser' onSubmit={editUserSubmit}>
-                  <input type='text' className="form-control form-input" placeholder='Full Name' onChange={e => setFullname(e.target.value)} required value={fullname} />
-                  <input type='text' className="form-control form-input" placeholder='Email' onChange={e => setEmail(e.target.value)} required value={email} />
-                  <input type='text' className="form-control form-input" placeholder='Phone' onChange={e => setPhone(e.target.value)} required value={phone} />
-                  <input type='text' className="form-control form-input" placeholder='Website' onChange={e => setWebsite(e.target.value)} required value={website} />
-                  <select type='text' className="form-control form-input" onChange={e => setActiveChange(e.target.value)} required value={active}>
-                    <option value="true">Active</option>
-                    <option value="false">Inactive</option>
-                  </select>
-                  <button type='submit' className='btn btn-table mt-2'>Submit</button>
-                </form>
-            </>
-          </Modal.Body>
-        </Modal>
+          <Modal show={editModelShow} onHide={() => setEditModelShow(false)}>
+            <Modal.Header>
+              <Modal.Title>Edit User</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="pt-0">
+              <>
+                  <form id='addUser' onSubmit={editUserSubmit}>
+                    <label className='form-label'>Enter the full name</label>
+                    <input type='text' className="form-control form-input" placeholder='Full Name' onChange={e => setFullname(e.target.value)} required value={fullname} />
+                    <label className='form-label'>Enter the email id</label>
+                    <input type='text' className="form-control form-input" placeholder='Email' onChange={e => setEmail(e.target.value)} required value={email} />
+                    <label className='form-label'>Enter the phone number</label>
+                    <input type='text' className="form-control form-input" placeholder='Phone' onChange={e => setPhone(e.target.value)} required value={phone} />
+                    <label className='form-label'>Enter the website</label>
+                    <input type='text' className="form-control form-input" placeholder='Website' onChange={e => setWebsite(e.target.value)} required value={website} />
+                    <label className='form-label'>Select the status</label>
+                    <select type='text' className="form-control form-input" onChange={e => setActiveChange(e.target.value)} required value={active}>
+                      <option value="true">Active</option>
+                      <option value="false">Inactive</option>
+                    </select>
+                    <button type='submit' className='btn btn-table mt-2'>Submit</button>
+                  </form>
+              </>
+            </Modal.Body>
+          </Modal>
+      </div>
     </div>
   )
 }
