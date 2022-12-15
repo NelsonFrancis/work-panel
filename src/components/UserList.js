@@ -130,14 +130,25 @@ const UserList = () => {
   }
   
   return (
-    <div className='section'>
+    <>
+    <div className='row'>
+      <div className='col-md-6'>
+        <h1 className='subpage-hd'>User List</h1>
+        <p className='pageline'>Below are the list of all users registered in this portal.</p>
+      </div>
+      <div className='col-md-6'>
+        <button className='btn btn-table mt45 float-right mr4p' onClick={() => setAddModelShow(true)}>Add User</button>
+      </div>
+    </div>
+    
+    <div className='section-list'>
       {showLoader &&  <img src={loader} alt='loader' className='loader' />}
       {displaySuccess && <span id="success">{successMsg}</span>}
+      
       {
         userdata.length === 0 ? 
         <img src={loader} alt='loader' className='loader' /> : 
         <div>
-          <button className='btn btn-table mb-4' onClick={() => setAddModelShow(true)}>Add User</button>
           <Datatable data={userdata} columns={columns} pagination dense />
         </div> 
       }
@@ -178,6 +189,7 @@ const UserList = () => {
           </Modal.Body>
         </Modal>
     </div>
+    </>
   )
 }
 

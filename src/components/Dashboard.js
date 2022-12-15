@@ -178,7 +178,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className='col-md-4'>
+        <div className='col-md-4 mb-4'>
           <div className='section-dashboard'>
             <h2 className='dashboard-hd'>{listIcon} Tasks</h2>
             <div className='width80'>
