@@ -209,22 +209,27 @@ body{
     list-style-type: none;
     width: 100%;
     padding: 4px 10px;
-    border: 1px solid #cdd0d4;
-    background-color: #edf1f6;
+    border: 1px solid #f3f3f3;
+    background-color: #f7f9fb;
     /* box-shadow: 1px 1px 1px rgb(122 122 122); */
     margin-bottom: 10px;
 }
+.task-item:hover {
+    border: 1px solid #f3f3f3;
+    background-color: #e6ebf0;
+}
 .task-title{
     display: block;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 600;
-    color: #000;
+    color: #184469;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 .project-title{
-    display: block;
     font-size: 12px;
     font-weight: 500;
-    color: #1e91f4;
+    color: #184469;
 }
 .navbar-light .navbar-nav .nav-link {
     color: #184469 !important;
@@ -246,24 +251,30 @@ body{
     padding-left: 0.8rem !important;
 }
 .task-description{
-    display: block;
     font-size: 12px;
     margin-top: 5px;
+    color: #184469;
+    font-weight: 500;
 }
 .btn{
     border-radius: 2px !important;
 }
 .datetime{
     font-size: 12px;
-    color: #8396ad;
-    margin-left: 20px;
+    color: #184469;
     font-weight: 600;
 }
 .username{
     font-size: 12px;
     font-weight: 600;
-    color: #1e91f4;
+    color: #184469;
     min-width: 200px;
+}
+.task-label{
+    color: #1e91f4;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 5px;
 }
 .page-subhd {
     font-size: 18px;

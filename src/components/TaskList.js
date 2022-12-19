@@ -191,28 +191,37 @@ const TaskList = () => {
               {taskData.map((data) => {
                 return (
                   <li key={data.id} className="task-item">
-                    <span className="width90">
+                    <span className="width100">
                       <span className="task-title">{data.title}</span>
                     </span>
-                    <span className="width10">
+                    {/* <span className="width10">
                       <span className="close" onClick={e => deleteTask(data.id)}>{deleteIcon}</span>
+                    </span> */}
+                    <span className="width50 mb-1">
+                      <span className="task-label">Project name</span>
+                      <span className="project-title">{data.projectName}</span>
                     </span>
-                    <span className="width100">
-                        <span className="project-title">{data.projectName}</span>
-                      </span>
-                    <span className="width100">
+                    <span className="width50 mb-1">
+                      <span className="task-label">Assigned to</span>
                       <span className="username">
-                        {usericon} {data.user}
+                        {data.user}
                       </span>
+                    </span>
+                    <span className="width50 mb-1">
+                      <span className="task-label">Assigned date</span>
                       <span className="datetime">
-                        {calendaricon} {data.date}
+                        {data.date}
                       </span>
+                    </span>
+                    <span className="width50 mb-1">
+                      <span className="task-label">Time</span>
                       <span className="datetime">
-                        {alaramicon} {data.time}
+                        {data.time}
                       </span>
                     </span>
                     <div className="clear-both"></div>
-                    <span className="width100">
+                    <span className="width100 mb-2">
+                      <span className="task-label">Task description</span>
                       <span className="task-description">
                         {data.description}
                       </span>
@@ -221,6 +230,9 @@ const TaskList = () => {
                     <span className="width100">
                       <button className="btn btn-table mt-2 mb-2" onClick={e => taskCompleted(data)}>
                         Mark as Complete
+                      </button>
+                      <button className="btn btn-table-delete mt-2 mb-2" onClick={e => deleteTask(data.id)}>
+                        Delete Task
                       </button>
                     </span>
                     <div className="clear-both"></div>
@@ -244,29 +256,37 @@ const TaskList = () => {
                       <span className="width100">
                         <span className="task-title">{data.title}</span>
                       </span>
-                      <span className="width100">
-                        <span className="project-title">{data.projectName}</span>
+                      <span className="width50 mb-1">
+                        <span className="task-label">Project name</span><span className="project-title">{data.projectName}</span>
                       </span>
-                      <span className="width100">
+                      <span className="width50 mb-1">
+                        <span className="task-label">Assigned to</span>
                         <span className="username">
-                          {usericon} {data.user}
+                          {data.user}
                         </span>
+                      </span>
+                      <span className="width50 mb-1">
+                        <span className="task-label">Assigned date</span>
                         <span className="datetime">
-                          {calendaricon} {data.date}
+                           {data.date}
                         </span>
+                      </span>
+                      <span className="width50 mb-1">
+                        <span className="task-label">Time</span>
                         <span className="datetime">
-                          {alaramicon} {data.time}
+                           {data.time}
                         </span>
                       </span>
                       <div className="clear-both"></div>
-                      <span className="width100">
+                      <span className="width100 mb-2">
+                        <span className="task-label">Task description</span>
                         <span className="task-description">
                           {data.description}
                         </span>
                       </span>
                       <div className="clear-both"></div>
                       <span className="width100">
-                        <button className="btn btn-table-delete mt-2 mb-2" onClick={e => taskNotCompleted(data)}>
+                        <button className="btn btn-table mt-2 mb-2" onClick={e => taskNotCompleted(data)}>
                           Mark as Not Complete
                         </button>
                       </span>
@@ -285,6 +305,7 @@ const TaskList = () => {
           <Modal.Body>
             <>
             <form onSubmit={addTaskSubmit}>
+                  <label className='form-label mt-0'>Enter the task title</label>
                   <input
                     type="text"
                     className="form-control form-input"
@@ -292,6 +313,7 @@ const TaskList = () => {
                     onChange={(e) => setTaskTitle(e.target.value)}
                     required
                   />
+                  <label className='form-label'>Select the project name</label>
                   <select 
                     className="form-control form-input"
                     onChange={(e) => setProjectName(e.target.value)}
@@ -303,6 +325,7 @@ const TaskList = () => {
                       })
                     }
                   </select>
+                  <label className='form-label'>Enter the task description</label>
                   <input
                     type="text"
                     className="form-control form-input"
@@ -310,6 +333,7 @@ const TaskList = () => {
                     onChange={(e) => setTaskDescription(e.target.value)}
                     required
                   />
+                  <label className='form-label'>Select who to assign to</label>
                   <select 
                     className="form-control form-input"
                     onChange={(e) => setTaskUser(e.target.value)}
