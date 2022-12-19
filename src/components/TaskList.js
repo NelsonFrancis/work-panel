@@ -298,7 +298,7 @@ const TaskList = () => {
             </div>
           </div>
 
-        <Modal show={showAddModal} onHide={() => setShowAddModal(false)} id="addTask">
+        <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
           <Modal.Header>
             <Modal.Title>Add Tasks</Modal.Title>
           </Modal.Header>
