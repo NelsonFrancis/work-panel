@@ -27,7 +27,6 @@ const ProjectList = () => {
     try{
       const response = await axios.get(`${url}`);
       setProjectData(response.data);
-      console.log(response.data);
     }catch (error){
       console.log(error);
     }
@@ -45,7 +44,6 @@ const ProjectList = () => {
     }
     axios.post(`${url}`, formData)
       .then(response => {
-        console.log("response = ", response);
         setShowLoader(false);
         setAddModelShow(false);
         setDisplaySuccess(true);
@@ -55,8 +53,7 @@ const ProjectList = () => {
           setSuccessMsg('');
           window.location.reload(false);
         }, 3000);
-      }
-      );
+      });
   }
 
   const deleteProjectSet = (id) => {
@@ -68,7 +65,6 @@ const ProjectList = () => {
     setShowLoader(true);
     axios.delete(`${url}/${userId}`)
       .then(response => {
-        console.log("delete response =", response);
         setDeleteModelShow(false);
         setDisplaySuccess(true);
         setSuccessMsg('Project deleted successfully !!!');

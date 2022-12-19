@@ -87,11 +87,8 @@ const Dashboard = () => {
   const getUsers = async () => {
     try{
       const response = await axios.get(`${usersUrl}`);
-      console.log("res", response);
       setActiveUsers(response.data.filter(user => (user.active === true)).length);
       setInactiveUsers(response.data.filter(user => (user.active === false)).length);
-      console.log("active users", activeUsers);
-      console.log("in active users", inactiveUsers);
     }catch (error){
       console.log(error)
     }
@@ -102,8 +99,6 @@ const Dashboard = () => {
       const response = await axios.get(`${projectsUrl}`);
       setOngoingProjects(response.data.filter(proj => (proj.status === "Ongoing")).length);
       setCompletedProjects(response.data.filter(proj => (proj.status === "Completed")).length);
-      console.log("completedProjects", completedProjects);
-      console.log("ongoingProjects", ongoingProjects);
     }catch (error){
       console.log(error);
     }
@@ -113,7 +108,6 @@ const Dashboard = () => {
     try{
       const response = await axios.get(`${completedTasksUrl}`);
       setCompletedTasks(response.data.length);
-      console.log("getCompletedTasks", response.data);
     }catch (error){
       console.log(error);
     }
@@ -123,7 +117,6 @@ const Dashboard = () => {
     try{
       const response = await axios.get(`${pendingTasksUrl}`);
       setPendingTasks(response.data.length);
-      console.log("getPendingTasks", response.data);
     }catch (error){
       console.log(error);
     }

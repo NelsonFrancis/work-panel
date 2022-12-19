@@ -21,7 +21,6 @@ const UserDetails = () => {
     const getUser = async () => {
         await axios.get(`${url}/${id}`)
         .then((response) => {
-            console.log(response.data);
             setUser(response.data);
             setFullname(response.data.name);
             setEmail(response.data.email);
@@ -42,7 +41,6 @@ const UserDetails = () => {
         }
         axios.put(`${url}/${id}`, updatedUser)
             .then(response => {
-              console.log("updated res =", response);
               setEditModelShow(false);
               setDisplaySuccess(true);
               setSuccessMsg('User edited successfully !!!');
@@ -86,22 +84,22 @@ const UserDetails = () => {
             </Modal.Header>
             <Modal.Body className="pt-0">
               <>
-                  <form id='addUser' onSubmit={editUserSubmit}>
-                    <label className='form-label'>Enter the full name</label>
-                    <input type='text' className="form-control form-input" placeholder='Full Name' onChange={e => setFullname(e.target.value)} required value={fullname} />
-                    <label className='form-label'>Enter the email id</label>
-                    <input type='text' className="form-control form-input" placeholder='Email' onChange={e => setEmail(e.target.value)} required value={email} />
-                    <label className='form-label'>Enter the phone number</label>
-                    <input type='text' className="form-control form-input" placeholder='Phone' onChange={e => setPhone(e.target.value)} required value={phone} />
-                    <label className='form-label'>Enter the website</label>
-                    <input type='text' className="form-control form-input" placeholder='Website' onChange={e => setWebsite(e.target.value)} required value={website} />
-                    <label className='form-label'>Select the status</label>
-                    <select type='text' className="form-control form-input" onChange={e => setActiveChange(e.target.value)} required value={active}>
-                      <option value="true">Active</option>
-                      <option value="false">Inactive</option>
-                    </select>
-                    <button type='submit' className='btn btn-table mt-2'>Submit</button>
-                  </form>
+                <form id='addUser' onSubmit={editUserSubmit}>
+                  <label className='form-label'>Enter the full name</label>
+                  <input type='text' className="form-control form-input" placeholder='Full Name' onChange={e => setFullname(e.target.value)} required value={fullname} />
+                  <label className='form-label'>Enter the email id</label>
+                  <input type='text' className="form-control form-input" placeholder='Email' onChange={e => setEmail(e.target.value)} required value={email} />
+                  <label className='form-label'>Enter the phone number</label>
+                  <input type='text' className="form-control form-input" placeholder='Phone' onChange={e => setPhone(e.target.value)} required value={phone} />
+                  <label className='form-label'>Enter the website</label>
+                  <input type='text' className="form-control form-input" placeholder='Website' onChange={e => setWebsite(e.target.value)} required value={website} />
+                  <label className='form-label'>Select the status</label>
+                  <select type='text' className="form-control form-input" onChange={e => setActiveChange(e.target.value)} required value={active}>
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                  </select>
+                  <button type='submit' className='btn btn-table mt-2'>Submit</button>
+                </form>
               </>
             </Modal.Body>
           </Modal>

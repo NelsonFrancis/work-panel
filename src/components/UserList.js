@@ -35,7 +35,6 @@ const UserList = () => {
     }
     axios.post(`${url}`, formData)
       .then(response => {
-        console.log("response = ", response);
         setShowLoader(false);
         setAddModelShow(false);
         setDisplaySuccess(true);
@@ -50,7 +49,6 @@ const UserList = () => {
   }
 
   const deleteUser = (id) => {
-    console.log("deleted = ", id);
     setDeleteId(id);
     setShowDeleteModal(true);
     
@@ -61,7 +59,6 @@ const UserList = () => {
     setShowLoader(true);
     axios.delete(`${url}/${id}`)
       .then(response => {
-        console.log("delete response =", response);
         setShowLoader(false);
         setDisplaySuccess(true);
         setSuccessMsg('User deleted successfully !!!');
@@ -77,7 +74,6 @@ const UserList = () => {
     try{
       const response = await axios.get(`${url}`);
       setUserData(response.data);
-      console.log(response.data);
     }catch (error){
       console.log(error)
     }
@@ -131,69 +127,69 @@ const UserList = () => {
   
   return (
     <>
-    <div className='row'>
-      <div className='col-md-6'>
-        <h1 className='subpage-hd'>User List</h1>
-        <p className='pageline'>Below are the list of all users registered in this portal.</p>
+      <div className='row'>
+        <div className='col-md-6'>
+          <h1 className='subpage-hd'>User List</h1>
+          <p className='pageline'>Below are the list of all users registered in this portal.</p>
+        </div>
+        <div className='col-md-6'>
+          <button className='btn btn-table mt45 float-right mr4p' onClick={() => setAddModelShow(true)}>Add User</button>
+        </div>
       </div>
-      <div className='col-md-6'>
-        <button className='btn btn-table mt45 float-right mr4p' onClick={() => setAddModelShow(true)}>Add User</button>
-      </div>
-    </div>
-    
-    <div className='section-list'>
-      {showLoader &&  <img src={loader} alt='loader' className='loader' />}
-      {displaySuccess && <span id="success">{successMsg}</span>}
       
-      {
-        userdata.length === 0 ? 
-        <img src={loader} alt='loader' className='loader' /> : 
-        <div>
-          <Datatable data={userdata} columns={columns} pagination dense />
-        </div> 
-      }
+      <div className='section-list'>
+        {showLoader &&  <img src={loader} alt='loader' className='loader' />}
+        {displaySuccess && <span id="success">{successMsg}</span>}
+        
+        {
+          userdata.length === 0 ? 
+          <img src={loader} alt='loader' className='loader' /> : 
+          <div>
+            <Datatable data={userdata} columns={columns} pagination dense />
+          </div> 
+        }
 
-        <Modal show={addModelShow} onHide={() => setAddModelShow(false)}>
-          <Modal.Header>
-            <Modal.Title>Add User</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="pt-0">
-            <>
-            <form onSubmit={addUserSubmit}>
-              <label className='form-label'>Enter the full name</label>
-              <input type='text' className="form-control form-input" placeholder='Full Name' onChange={e => setFullname(e.target.value)} required />
-              <label className='form-label'>Enter the email id</label>
-              <input type='text' className="form-control form-input" placeholder='Email' onChange={e => setEmail(e.target.value)} required />
-              <label className='form-label'>Enter the phone number</label>
-              <input type='text' className="form-control form-input" placeholder='Phone' onChange={e => setPhone(e.target.value)} required />
-              <label className='form-label'>Enter the website</label>
-              <input type='text' className="form-control form-input" placeholder='Website' onChange={e => setWebsite(e.target.value)} required />
-              <label className='form-label'>Select the status</label>
-              <select type='text' className="form-control form-input" onChange={e => setActiveChange(e.target.value)} required value={active}>
-                <option value="true">Active</option>
-                <option value="false">Inactive</option>
-              </select>
-              <button type='submit' className='btn btn-table mt-2'>Submit</button>
-            </form>
-            </>
-          </Modal.Body>
-        </Modal>
+          <Modal show={addModelShow} onHide={() => setAddModelShow(false)}>
+            <Modal.Header>
+              <Modal.Title>Add User</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="pt-0">
+              <>
+              <form onSubmit={addUserSubmit}>
+                <label className='form-label'>Enter the full name</label>
+                <input type='text' className="form-control form-input" placeholder='Full Name' onChange={e => setFullname(e.target.value)} required />
+                <label className='form-label'>Enter the email id</label>
+                <input type='text' className="form-control form-input" placeholder='Email' onChange={e => setEmail(e.target.value)} required />
+                <label className='form-label'>Enter the phone number</label>
+                <input type='text' className="form-control form-input" placeholder='Phone' onChange={e => setPhone(e.target.value)} required />
+                <label className='form-label'>Enter the website</label>
+                <input type='text' className="form-control form-input" placeholder='Website' onChange={e => setWebsite(e.target.value)} required />
+                <label className='form-label'>Select the status</label>
+                <select type='text' className="form-control form-input" onChange={e => setActiveChange(e.target.value)} required value={active}>
+                  <option value="true">Active</option>
+                  <option value="false">Inactive</option>
+                </select>
+                <button type='submit' className='btn btn-table mt-2'>Submit</button>
+              </form>
+              </>
+            </Modal.Body>
+          </Modal>
 
-        <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} id="deleteUser">
-          <Modal.Body className="bg-red">
-            <>
-              <p className="text-center">
-                <span className="trashicon">{trashicon}</span>
-                <span className="delete-qt">Are you sure you want to delete this user?</span>
-              </p>
-              <p className="text-center">
-              <button className="yes-btn" onClick={e => confirmDeleteUser(deleteId)}>Yes</button>
-              <button className="yes-btn" data-dismiss="modal">No</button>
-              </p>
-            </>
-          </Modal.Body>
-        </Modal>
-    </div>
+          <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} id="deleteUser">
+            <Modal.Body className="bg-red">
+              <>
+                <p className="text-center">
+                  <span className="trashicon">{trashicon}</span>
+                  <span className="delete-qt">Are you sure you want to delete this user?</span>
+                </p>
+                <p className="text-center">
+                <button className="yes-btn" onClick={e => confirmDeleteUser(deleteId)}>Yes</button>
+                <button className="yes-btn" data-dismiss="modal">No</button>
+                </p>
+              </>
+            </Modal.Body>
+          </Modal>
+      </div>
     </>
   )
 }

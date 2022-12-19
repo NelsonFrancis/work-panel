@@ -43,7 +43,6 @@ const ProjectDetails = () => {
         }
         axios.put(`${url}/${id}`, updatedProject)
             .then(response => {
-              console.log("updated res =", response);
               setShowLoader(false);
               setEditModelShow(false);
               setDisplaySuccess(true);
