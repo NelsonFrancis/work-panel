@@ -126,17 +126,22 @@ const ProjectList = () => {
     <>
         {showLoader &&  <img src={loader} alt='loader' className='loader' />}
         {displaySuccess && <span id="success">{successMsg}</span>}
-        <h1 className='subpage-hd'>Project List</h1>
-        <p className='pageline'>Below are the list of all projects. <br />You can create a new project, assign it to your employees, edit your project details or delete your project.</p>
-        <div className='section'>
+        <div className='row'>
+          <div className='col-md-6'>
+            <h1 className='subpage-hd'>Project List</h1>
+            <p className='pageline'>Below are the list of all projects registered in this portal. <br />You can create a new project, assign it to your employees, edit your project details or delete your project.</p>
+          </div>
+          <div className='col-md-6'>
+            <button className='btn btn-table mt45 float-right mr4p' onClick={() => setAddModelShow(true)}>Add Projects</button>
+          </div>
+        </div>
+        <div className='section-list'>
           {
             projectData.length === 0 ? 
             <>
-            <p className="error-line">No Projects added</p> 
-            <button className='btn btn-table mt-4' onClick={() => setAddModelShow(true)}>Add Projects</button>
+              <p className="error-line">No Projects added</p> 
             </> : 
             <div>
-              <button className='btn btn-table mb-4' onClick={() => setAddModelShow(true)}>Add Projects</button>
               <Datatable data={projectData} columns={columns} pagination dense />
             </div> 
           }
@@ -148,10 +153,15 @@ const ProjectList = () => {
           <Modal.Body>
             <>
               <form id='addProjectsForm' onSubmit={(e) => addProjectSubmit(e)}>
+                <label className='form-label mt-0'>Enter the project name</label>
                 <input type='text' className="form-control form-input" placeholder='Project Name' onChange={e => setProjectName(e.target.value)} value={projectName} required />
+                <label className='form-label mt-0'>Enter the client name</label>
                 <input type='text' className="form-control form-input" placeholder='Client Name' onChange={e => setClientName(e.target.value)} value={clientName} required />
+                <label className='form-label mt-0'>Enter the project description</label>
                 <input type='text' className="form-control form-input" placeholder='Project Description' onChange={e => setProjectDescription(e.target.value)} value={projectDescription} required />
+                <label className='form-label mt-0'>Select the project deadline</label>
                 <input type='date' className="form-control form-input" placeholder='Project Deadline' onChange={e => setProjectDeadline(e.target.value)} value={projectDeadline} required />
+                <label className='form-label mt-0'>Select the status</label>
                 <select className="form-control form-input" onChange={e => setStatus(e.target.value)} required>
                   <option value="">Select Status</option>
                   <option value="Ongoing">Ongoing</option>

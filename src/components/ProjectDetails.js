@@ -62,44 +62,50 @@ const ProjectDetails = () => {
     }, [])
 
   return (
-    
-    <div className='section'>
-        {
-          !projectData ? 
-          <img src={loader} alt='loader' className='loader' /> : 
-          <>
-            {showLoader &&  <img src={loader} alt='loader' className='loader' />}
-            {displaySuccess && <span id="success">{successMsg}</span>}
-            <h1 className='page-detail-hd'>{projectData.projectName} details</h1>
-            <button className="float-right btn btn-table" onClick={() => setEditModelShow(true)}>Edit Project</button>
-            <p><span className='label'>Project Name:</span> {projectData.projectName}</p>
-            <p><span className='label'>Client Name:</span> {projectData.clientName}</p>
-            <p><span className='label'>Project Description:</span> {projectData.projectDescription}</p>
-            <p><span className='label'>Project Deadline:</span> {projectData.projectDeadline}</p>
-            <p><span className='label'>Project Status:</span> {projectData.status}</p>
-          </>
-        }
-        <Modal show={editModelShow} onHide={() => setEditModelShow(false)}>
-          <Modal.Header>
-            <Modal.Title>Edit Project</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+    <div className='col-md-6'>
+      <div className='section-details'>
+          {
+            !projectData ? 
+            <img src={loader} alt='loader' className='loader' /> : 
             <>
-                <form id='editProject' onSubmit={editProjectSubmit}>
-                  <input type='text' className="form-control form-input" placeholder='Project Name' onChange={e => setProjectName(e.target.value)} required value={projectName} />
-                  <input type='text' className="form-control form-input" placeholder='Client Name' onChange={e => setClientName(e.target.value)} required value={clientName} />
-                  <input type='text' className="form-control form-input" placeholder='Project Description' onChange={e => setProjectDescription(e.target.value)} required value={projectDescription} />
-                  <input type='date' className="form-control form-input" placeholder='Project Deadline' onChange={e => setProjectDeadline(e.target.value)} required value={projectDeadline} />
-                  <select className="form-control form-input" onChange={e => setStatus(e.target.value)} required value={status}>
-                      <option value="">Select Status</option>
-                      <option value="Ongoing">Ongoing</option>
-                      <option value="Completed">Completed</option>
-                    </select> 
-                  <button type='submit' className='btn btn-table mt-2'>Submit</button>
-                </form>
+              {showLoader &&  <img src={loader} alt='loader' className='loader' />}
+              {displaySuccess && <span id="success">{successMsg}</span>}
+              <h1 className='page-detail-hd'>{projectData.projectName} details</h1>
+              <button className="float-right btn btn-table" onClick={() => setEditModelShow(true)}>Edit Project</button>
+              <p><span className='label'>Project Name:</span> {projectData.projectName}</p>
+              <p><span className='label'>Client Name:</span> {projectData.clientName}</p>
+              <p><span className='label'>Project Description:</span> {projectData.projectDescription}</p>
+              <p><span className='label'>Project Deadline:</span> {projectData.projectDeadline}</p>
+              <p><span className='label'>Project Status:</span> {projectData.status}</p>
             </>
-          </Modal.Body>
-        </Modal>
+          }
+          <Modal show={editModelShow} onHide={() => setEditModelShow(false)}>
+            <Modal.Header>
+              <Modal.Title>Edit Project</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <>
+                  <form id='editProject' onSubmit={editProjectSubmit}>
+                    <label className='form-label mt-0'>Enter the project name</label>
+                    <input type='text' className="form-control form-input" placeholder='Project Name' onChange={e => setProjectName(e.target.value)} required value={projectName} />
+                    <label className='form-label mt-0'>Enter the client name</label>
+                    <input type='text' className="form-control form-input" placeholder='Client Name' onChange={e => setClientName(e.target.value)} required value={clientName} />
+                    <label className='form-label mt-0'>Enter the project description</label>
+                    <input type='text' className="form-control form-input" placeholder='Project Description' onChange={e => setProjectDescription(e.target.value)} required value={projectDescription} />
+                    <label className='form-label mt-0'>Select the project deadline</label>
+                    <input type='date' className="form-control form-input" placeholder='Project Deadline' onChange={e => setProjectDeadline(e.target.value)} required value={projectDeadline} />
+                    <label className='form-label mt-0'>Select the status</label>
+                    <select className="form-control form-input" onChange={e => setStatus(e.target.value)} required value={status}>
+                        <option value="">Select Status</option>
+                        <option value="Ongoing">Ongoing</option>
+                        <option value="Completed">Completed</option>
+                      </select> 
+                    <button type='submit' className='btn btn-table mt-2'>Submit</button>
+                  </form>
+              </>
+            </Modal.Body>
+          </Modal>
+      </div>
     </div>
   )
 }

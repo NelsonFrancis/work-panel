@@ -73,7 +73,7 @@ const UserDetails = () => {
           {!user && <img src={loader} alt='loader' className='loader' />}
           {displaySuccess && <span id="success">{successMsg}</span>}
           <h1 className='page-detail-hd'>{user.name} details</h1>
-          <button className="float-right btn btn-table mr15" onClick={() => setEditModelShow(true)}>Edit details</button>
+          <button className="float-right btn btn-table mr15" onClick={() => setEditModelShow(true)}>Edit user</button>
           <p><span className='label'>Name:</span> <span className='label-val'>{user.name}</span></p>
           <p><span className='label'>Email:</span>  <span className='label-val'>{user.email}</span></p>
           <p><span className='label'>Phone:</span>  <span className='label-val'>{user.phone}</span></p>
