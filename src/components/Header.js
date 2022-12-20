@@ -21,7 +21,7 @@ function Header() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
           <li className="nav-item"><NavLink to='/' className='nav-link'>{dashboard} Dashboard</NavLink></li>
-          <li className="nav-item"><NavLink to='userlist' className='nav-link'>{users} User List</NavLink></li>
+          <li className="nav-item"><NavLink to='/userlist' className='nav-link'>{users} User List</NavLink></li>
           <li className="nav-item"><NavLink to='projectlist' className='nav-link'>{projects} Project List</NavLink></li>
           <li className="nav-item"><NavLink to='tasklist' className='nav-link'>{lists} Task List</NavLink></li>
           </ul>
